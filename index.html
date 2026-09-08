@@ -1,0 +1,2158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Radar — Prospecting Command Center</title>
+    <meta
+      name="description"
+      content="Client Radar: real-time market intelligence for global client prospecting."
+    />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA+CAYAAABzwahEAAAACXBIWXMAAAsSAAALEgHS3X78AAAE70lEQVRogd1bTXbaMBCe5LEPXXqV5AThAjX0BElOEHb1LvQEoSco2XmXcILACUp8gcINwqZeFp8gfUNGVFgynpElQvq9x3s8y3+fNJr5ZiQfvb6+ggRJnJ8BwJl2SU90AxMzAFilWTQ3WnYgifM2AAzoDLzHS5pFL9VXbINFPInzKwBQvxPjBD8oAGCEvzSLVox3wg7/WTq8oOsfjQskxIkwvsyp0RgO2AE9jgUkcb6qGIglWkOaRROjhXBsHCEzSuIcL3raM2kgIrMkzjtGi4mZceQN+M5PSZyPjBaCQZzmDt7w0jh7f0DyQ8bT6qziNolzq9lvEddIXxhn7h9txhOrRlzHjY18ecQfD4Q0otbBCYDktyxoQ5wc2Xuat46CaeoS3Ol+Qx/xSkewR6A3HgNAhxnXOdNBx4ZjC95Gux/Yey/JEc0r5uWcE7stkIqnLo46dmqLDlwZpzQHksWQ+ChVZQK4qEZUe31F3OfcRsJDjnpqAlJuLo543VktplDgoCC56NspVcH1OacYtlsODsIG1Mj9gCa9hSTO0Vy7RgMfHUO5OWDM1daeSKOF/jAa3vAMAN8A4AsAfEqz6Ij+X9N7FurEpiM+TrOobxwNBIo+D5a7TykpMdLSNItUFFknLKRXXpC46xzfG2mqAYwsTrggwmxHqjK2ltHCw2IfpLU6wI3RKEhfbXAhXjSJ+1oFp1zJAe1YmxGqGjlTF+JD21zaBSI7pBjqQyGOdxUZOJASX6ZZxNb0lOaOKky1CQZNbyAlzhYNFHYmAXKAsaOu34KE+JLrPYn0rKIe1hSNTFxBQpz1QDLvSahqLHduU8wf0Xs8U9jbOEOJcuPGymHAFHdhHLGAEpgHrfO75QIml3jBLPei9741GvyBO7dtzk9Vb9dKlUvcVjywIXRmxn2PqjT7RHUKlzhXKIQoaIjASLPXitPbiNMDQy0vSVCXdK3zcR9pqYKPvH5fYOfjHInadNWUA2+1dhZxqTYPCG/FDhZxFQJqcCidwwLX1DnFin0Q5zyD867+nJtW4gmFJXPKlXN8G9jOjeu4xsYRf+AmJ6xSmk9TB4GedwG3DsAqO3sdcTL3qdHQHPccM6caHQtc4ieCm/b1+rUHLAQ5gHfiilAtqDrS80S+oKIiZxdUOxTxS0o7a0EpbI8WEF2xEJaPB5JcQRrOJIX7OTlFF09/LyFd2uzHgpR4V+JA0ERp4eGcyOyygCWdc55m0UBYUBxKM8Ojr59/40V3Rks1Ctqq4aTULFtCQbods3Q/2w7HOnx3WVDAnp3gA13KvETQi7wlE3fSDq6S9QK0+tV7QNuT51LYXDXR6u9GXluhcd2TN2+apOCD5x63k9RCG+lGy1LHHuYbmtov2p4RFNTBcx+7L9Gru3jFKixoxcJriqrFaUn02YVPSBxv+mfHSS54puXkRh2gyVCfqzOY15+tN+once7FfCxYULiZSOI0mXSffr5L1ustLIp41aYan1iqb0donuoaQImaDmn8kPX5a1x4VMTb9EKHsCAQEmszByVgSIEF98oHgA3HrY9xkjifNdwxeMiYplm0SbDKAuaKuwb9wbAoF1K2iJPJ/2/kVUFjK6EyJCuFnR7F4o+OqY00MD64G7gk+QeA2g/udhKHf+pJiYlD+ULJhoIWHSa7CCuIPqqlTtAzMVs1JTRsMlhWwQGAv+px1tAEdle+AAAAAElFTkSuQmCC"
+    />
+    <style>
+      /* ============================================================
+     DESIGN TOKENS
+     ============================================================ */
+      :root {
+        --bg: #0a0d10;
+        --bg-grid: #0c1013;
+        --surface: #12161b;
+        --surface-2: #161b21;
+        --surface-hover: #1a2027;
+        --border: #232a32;
+        --border-strong: #313a44;
+        --text: #e9edf1;
+        --text-muted: #8b96a3;
+        --text-faint: #576270;
+
+        --accent: #43d17a;
+        --accent-dim: #2c8f56;
+        --accent-glow: rgba(67, 209, 122, 0.18);
+        --warning: #e8ab3f;
+        --warning-dim: rgba(232, 171, 63, 0.16);
+        --danger: #ea5468;
+        --danger-dim: rgba(234, 84, 104, 0.14);
+        --neutral-chip: #232a32;
+
+        --radius-sm: 7px;
+        --radius-md: 12px;
+        --radius-lg: 18px;
+
+        --sp-1: 4px;
+        --sp-2: 8px;
+        --sp-3: 12px;
+        --sp-4: 16px;
+        --sp-5: 24px;
+        --sp-6: 32px;
+        --sp-8: 48px;
+
+        --shadow-card:
+          0 1px 0 rgba(255, 255, 255, 0.02) inset,
+          0 12px 28px -16px rgba(0, 0, 0, 0.65);
+        --shadow-pop: 0 20px 44px -20px rgba(0, 0, 0, 0.75);
+
+        --font-sans:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial, sans-serif;
+        --font-mono:
+          ui-monospace, 'SF Mono', 'Cascadia Mono', 'Consolas',
+          'Liberation Mono', monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--bg);
+        background-image:
+          radial-gradient(
+            circle at 12% 8%,
+            rgba(67, 209, 122, 0.05),
+            transparent 42%
+          ),
+          radial-gradient(
+            circle at 88% 92%,
+            rgba(67, 209, 122, 0.035),
+            transparent 45%
+          );
+        color: var(--text);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.4;
+        min-height: 100vh;
+      }
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin: 0;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
+      a {
+        color: inherit;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: var(--radius-sm);
+      }
+
+      /* ============================================================
+     LAYOUT SHELL
+     ============================================================ */
+      .app {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--sp-5) var(--sp-8);
+      }
+
+      /* ============================================================
+     HEADER
+     ============================================================ */
+      header.top-bar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(10, 13, 16, 0.86);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+        margin: 0 calc(-1 * var(--sp-5));
+        padding: var(--sp-3) var(--sp-5);
+      }
+      .top-bar-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--sp-4);
+        flex-wrap: wrap;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        min-width: 0;
+      }
+      .radar-mark {
+        width: 34px;
+        height: 34px;
+        flex: none;
+        border-radius: 50%;
+        background: radial-gradient(circle at 50% 50%, #0d1512 0%, #0a0d10 70%);
+        border: 1px solid var(--border-strong);
+        position: relative;
+        overflow: hidden;
+      }
+      .radar-mark svg {
+        position: absolute;
+        inset: 0;
+      }
+      .radar-sweep {
+        transform-origin: 17px 17px;
+        animation: sweep 4s linear infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .radar-sweep {
+          animation: none;
+        }
+      }
+      @keyframes sweep {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .brand-text {
+        min-width: 0;
+      }
+      .brand-name {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+      }
+      .brand-sub {
+        font-size: 11.5px;
+        color: var(--text-faint);
+        white-space: nowrap;
+        margin-top: 1px;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-4);
+        flex-wrap: wrap;
+      }
+      .bd-clock {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-2);
+        padding: 6px var(--sp-3) 6px var(--sp-2);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+      .live-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 0 var(--accent-glow);
+        animation: pulse-dot 2.2s ease-in-out infinite;
+        flex: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .live-dot {
+          animation: none;
+        }
+      }
+      @keyframes pulse-dot {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(67, 209, 122, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 0 5px rgba(67, 209, 122, 0);
+        }
+      }
+      .bd-clock-text {
+        font-size: 12.5px;
+      }
+      .bd-clock-label {
+        color: var(--text-faint);
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .bd-clock-time {
+        font-family: var(--font-mono);
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .bd-clock-date {
+        color: var(--text-muted);
+        font-size: 11.5px;
+        margin-left: 4px;
+      }
+
+      .icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-muted);
+        transition:
+          background 0.15s,
+          color 0.15s,
+          border-color 0.15s,
+          transform 0.15s;
+        position: relative;
+      }
+      .icon-btn:hover {
+        background: var(--surface-hover);
+        color: var(--text);
+        border-color: var(--border-strong);
+      }
+      .icon-btn:active {
+        transform: scale(0.94);
+      }
+      .icon-btn svg {
+        width: 17px;
+        height: 17px;
+      }
+      .icon-btn.spinning svg {
+        animation: spin 0.6s ease;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(180deg);
+        }
+      }
+
+      .tooltip {
+        position: relative;
+      }
+      .tooltip::after {
+        content: attr(data-tip);
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        background: #1b2128;
+        border: 1px solid var(--border-strong);
+        color: var(--text);
+        font-size: 11px;
+        padding: 5px 8px;
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.12s;
+        box-shadow: var(--shadow-pop);
+        z-index: 30;
+      }
+      .tooltip:hover::after,
+      .tooltip:focus-visible::after {
+        opacity: 1;
+      }
+
+      /* ============================================================
+     PAGE INTRO
+     ============================================================ */
+      .page-intro {
+        padding: var(--sp-6) 0 var(--sp-5);
+      }
+      .page-title {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .page-desc {
+        color: var(--text-muted);
+        font-size: 13.5px;
+        margin-top: var(--sp-1);
+        max-width: 560px;
+      }
+
+      /* ============================================================
+     SUMMARY METRICS
+     ============================================================ */
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sp-3);
+        margin-bottom: var(--sp-4);
+      }
+      .metric-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: var(--sp-4);
+        box-shadow: var(--shadow-card);
+      }
+      .metric-card.is-open {
+        border-color: rgba(67, 209, 122, 0.35);
+      }
+      .metric-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .metric-value {
+        font-family: var(--font-mono);
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: var(--sp-2);
+        line-height: 1;
+      }
+      .metric-card.is-open .metric-value {
+        color: var(--accent);
+      }
+      .metric-card.is-weekend .metric-value {
+        color: var(--warning);
+      }
+
+      .best-window {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        background: linear-gradient(
+          90deg,
+          rgba(67, 209, 122, 0.08),
+          rgba(67, 209, 122, 0.02)
+        );
+        border: 1px solid rgba(67, 209, 122, 0.28);
+        border-radius: var(--radius-md);
+        padding: var(--sp-3) var(--sp-4);
+        margin-bottom: var(--sp-5);
+        font-size: 13px;
+      }
+      .best-window.is-empty {
+        background: var(--surface);
+        border-color: var(--border);
+        color: var(--text-muted);
+      }
+      .best-window svg {
+        width: 16px;
+        height: 16px;
+        color: var(--accent);
+        flex: none;
+      }
+      .best-window.is-empty svg {
+        color: var(--text-faint);
+      }
+      .best-window b {
+        font-weight: 600;
+      }
+      .best-window .bw-time {
+        font-family: var(--font-mono);
+        color: var(--accent);
+        margin-left: auto;
+        font-weight: 600;
+      }
+
+      /* ============================================================
+     FILTER BAR
+     ============================================================ */
+      .filter-bar {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        margin-bottom: var(--sp-5);
+        flex-wrap: wrap;
+      }
+      .search-field {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-2);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 0 var(--sp-3);
+        height: 40px;
+        flex: 1 1 220px;
+        max-width: 320px;
+        transition: border-color 0.15s;
+      }
+      .search-field:focus-within {
+        border-color: var(--border-strong);
+      }
+      .search-field svg {
+        width: 15px;
+        height: 15px;
+        color: var(--text-faint);
+        flex: none;
+      }
+      .search-field input {
+        background: none;
+        border: none;
+        outline: none;
+        color: var(--text);
+        font-size: 13px;
+        width: 100%;
+        font-family: inherit;
+      }
+      .search-field input::placeholder {
+        color: var(--text-faint);
+      }
+
+      .filter-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        height: 40px;
+        padding: 0 var(--sp-3);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-muted);
+        font-size: 12.5px;
+        font-weight: 500;
+        transition:
+          background 0.15s,
+          color 0.15s,
+          border-color 0.15s;
+      }
+      .filter-chip svg {
+        width: 14px;
+        height: 14px;
+      }
+      .filter-chip:hover {
+        border-color: var(--border-strong);
+        color: var(--text);
+      }
+      .filter-chip[aria-pressed='true'] {
+        background: var(--accent-glow);
+        border-color: rgba(67, 209, 122, 0.45);
+        color: var(--accent);
+      }
+      .filter-chip.weekend-chip[aria-pressed='true'] {
+        background: var(--warning-dim);
+        border-color: rgba(232, 171, 63, 0.45);
+        color: var(--warning);
+      }
+
+      .result-count {
+        font-size: 12px;
+        color: var(--text-faint);
+        margin-left: auto;
+      }
+
+      /* ============================================================
+     MARKET GRID
+     ============================================================ */
+      .market-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sp-4);
+      }
+
+      .market-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: var(--sp-4) var(--sp-4) var(--sp-4);
+        box-shadow: var(--shadow-card);
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-3);
+        transition:
+          transform 0.18s ease,
+          border-color 0.18s ease,
+          box-shadow 0.18s ease;
+        position: relative;
+      }
+      .market-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--border-strong);
+      }
+      .market-card.status-open {
+        border-color: rgba(67, 209, 122, 0.3);
+      }
+      .market-card.status-open.is-priority {
+        border-color: rgba(67, 209, 122, 0.55);
+        box-shadow:
+          var(--shadow-card),
+          0 0 0 1px rgba(67, 209, 122, 0.12),
+          0 0 26px -6px rgba(67, 209, 122, 0.22);
+      }
+      .market-card.status-weekend {
+        border-color: rgba(232, 171, 63, 0.22);
+      }
+
+      .priority-tag {
+        position: absolute;
+        top: -1px;
+        right: var(--sp-4);
+        transform: translateY(-50%);
+        background: var(--accent);
+        color: #06210f;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 999px;
+      }
+
+      .card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--sp-2);
+      }
+      .country-id {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-2);
+        min-width: 0;
+      }
+      .flag {
+        width: 26px;
+        height: 18px;
+        flex: none;
+        border-radius: 3px;
+        overflow: hidden;
+        display: inline-flex;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+      .flag svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .country-name {
+        font-size: 15px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .country-code {
+        color: var(--text-faint);
+        font-size: 11.5px;
+        font-weight: 500;
+        margin-left: 4px;
+      }
+
+      .status-badge {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 4px 9px 4px 7px;
+        border-radius: 999px;
+        white-space: nowrap;
+        flex: none;
+      }
+      .status-badge .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+      .status-badge.open {
+        background: var(--accent-glow);
+        color: var(--accent);
+      }
+      .status-badge.open .dot {
+        background: var(--accent);
+        box-shadow: 0 0 0 3px rgba(67, 209, 122, 0.18);
+      }
+      .status-badge.outside {
+        background: var(--neutral-chip);
+        color: var(--text-muted);
+      }
+      .status-badge.outside .dot {
+        background: var(--text-faint);
+      }
+      .status-badge.weekend {
+        background: var(--warning-dim);
+        color: var(--warning);
+      }
+      .status-badge.weekend .dot {
+        background: var(--warning);
+      }
+
+      .time-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding: var(--sp-3);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+      .time-main {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+      .time-value {
+        font-family: var(--font-mono);
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .time-meta {
+        font-size: 11px;
+        color: var(--text-faint);
+        font-family: var(--font-mono);
+      }
+      .remaining-tag {
+        text-align: right;
+        font-size: 11.5px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+      .remaining-tag.is-open {
+        color: var(--accent);
+      }
+      .remaining-bar {
+        width: 68px;
+        height: 4px;
+        border-radius: 999px;
+        background: var(--border);
+        margin-top: 5px;
+        overflow: hidden;
+        margin-left: auto;
+      }
+      .remaining-bar-fill {
+        height: 100%;
+        background: var(--accent);
+        border-radius: 999px;
+      }
+
+      .section-label {
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-faint);
+        font-weight: 600;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .chip {
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        color: var(--text-muted);
+        font-size: 12px;
+        font-weight: 500;
+        padding: 6px 11px;
+        border-radius: var(--radius-sm);
+        transition:
+          background 0.12s,
+          border-color 0.12s,
+          color 0.12s;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .chip:hover {
+        border-color: var(--border-strong);
+        color: var(--text);
+      }
+      .chip[aria-pressed='true'] {
+        background: rgba(67, 209, 122, 0.14);
+        border-color: rgba(67, 209, 122, 0.5);
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .chip .check {
+        width: 12px;
+        height: 12px;
+      }
+
+      .niche-chip {
+        background: var(--surface-2);
+      }
+      .niche-chip:hover {
+        background: var(--surface-hover);
+      }
+      .niche-chip:active {
+        transform: scale(0.97);
+      }
+
+      .city-block.needs-city .chip-row {
+        outline: 1px solid rgba(234, 84, 104, 0.5);
+        outline-offset: 4px;
+        border-radius: var(--radius-md);
+      }
+      .validation-msg {
+        font-size: 11.5px;
+        color: var(--danger);
+        display: none;
+        align-items: center;
+        gap: 5px;
+        margin-top: 2px;
+      }
+      .validation-msg svg {
+        width: 12px;
+        height: 12px;
+        flex: none;
+      }
+      .city-block.needs-city .validation-msg {
+        display: flex;
+      }
+      .city-block.needs-city.shake .chip-row {
+        animation: shake 0.32s ease;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .city-block.shake .chip-row {
+          animation: none;
+        }
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-4px);
+        }
+        75% {
+          transform: translateX(4px);
+        }
+      }
+
+      .niche-block {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      /* ============================================================
+     EMPTY STATE
+     ============================================================ */
+      .empty-state {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: var(--sp-8) var(--sp-4);
+        color: var(--text-muted);
+        border: 1px dashed var(--border-strong);
+        border-radius: var(--radius-lg);
+        font-size: 13.5px;
+      }
+
+      /* ============================================================
+     FOOTER
+     ============================================================ */
+      footer {
+        margin-top: 28px;
+        color: #555f5a;
+        font-size: 10px;
+        text-align: center;
+      }
+      span.brand-sm {
+        text-align: center;
+      }
+      .brand {
+        color: #a7b1ac;
+        font-weight: 900;
+      }
+      #sm {
+        color: fff;
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .socials {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 9px;
+      }
+
+      .socials a {
+        display: grid;
+        place-items: center;
+        width: 29px;
+        height: 29px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 8px;
+        color: #9ba59f;
+        background: rgba(255, 255, 255, 0.045);
+        text-decoration: none;
+        transition:
+          color 0.18s ease,
+          border-color 0.18s ease,
+          background 0.18s ease,
+          transform 0.18s ease;
+      }
+
+      .socials a:hover {
+        color: var(--accent);
+        border-color: rgba(57, 229, 140, 0.35);
+        background: rgba(57, 229, 140, 0.06);
+        transform: translateY(-1px);
+      }
+
+      .socials svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+      }
+
+      .github-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+      }
+
+      .github-icon svg {
+        display: block;
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+
+      /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+      @media (max-width: 1080px) {
+        .market-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 760px) {
+        .app {
+          padding: 0 var(--sp-4) var(--sp-6);
+        }
+        header.top-bar {
+          margin: 0 calc(-1 * var(--sp-4));
+          padding: var(--sp-3) var(--sp-4);
+        }
+        .brand-sub {
+          display: none;
+        }
+        .summary-grid {
+          grid-template-columns: repeat(4, minmax(120px, 1fr));
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 2px;
+        }
+        .metric-card {
+          padding: var(--sp-3);
+        }
+        .metric-value {
+          font-size: 24px;
+        }
+        .market-grid {
+          grid-template-columns: 1fr;
+        }
+        .filter-bar {
+          gap: var(--sp-2);
+        }
+        .search-field {
+          flex-basis: 100%;
+          max-width: none;
+          order: -1;
+        }
+        .result-count {
+          margin-left: 0;
+        }
+        .page-title {
+          font-size: 22px;
+        }
+      }
+      @media (max-width: 420px) {
+        .bd-clock-date {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header class="top-bar">
+        <div class="top-bar-inner">
+          <div class="brand">
+            <span class="radar-mark" aria-hidden="true">
+              <svg viewBox="0 0 34 34">
+                <circle
+                  cx="17"
+                  cy="17"
+                  r="15.5"
+                  stroke="#232a32"
+                  stroke-width="1"
+                  fill="none"
+                />
+                <circle
+                  cx="17"
+                  cy="17"
+                  r="10.5"
+                  stroke="#1b2128"
+                  stroke-width="1"
+                  fill="none"
+                />
+                <circle
+                  cx="17"
+                  cy="17"
+                  r="5.5"
+                  stroke="#1b2128"
+                  stroke-width="1"
+                  fill="none"
+                />
+                <g class="radar-sweep">
+                  <path
+                    d="M17 17 L17 1.5 A15.5 15.5 0 0 1 29.9 9 Z"
+                    fill="url(#sweepGrad)"
+                  />
+                </g>
+                <circle cx="17" cy="17" r="1.6" fill="#43d17a" />
+                <defs>
+                  <linearGradient
+                    id="sweepGrad"
+                    x1="17"
+                    y1="1.5"
+                    x2="29.9"
+                    y2="9"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0" stop-color="#43d17a" stop-opacity="0.55" />
+                    <stop offset="1" stop-color="#43d17a" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+            <span class="brand-text">
+              <span class="brand-name">Client Radar</span>
+              <span class="brand-sub">Prospecting Command Center</span>
+            </span>
+          </div>
+
+          <div class="header-right">
+            <div class="bd-clock">
+              <span class="live-dot" aria-hidden="true"></span>
+              <span class="bd-clock-text">
+                <span class="bd-clock-label">Dhaka</span>
+                <span class="bd-clock-time" id="bdTime">--:--:--</span>
+                <span class="bd-clock-date" id="bdDate">--</span>
+              </span>
+            </div>
+            <button
+              class="icon-btn tooltip"
+              id="refreshBtn"
+              data-tip="Refresh now"
+              aria-label="Refresh market data"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                <path d="M21 3v6h-6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-intro">
+        <h1 class="page-title">Global market overview</h1>
+        <p class="page-desc">
+          Live working hours across every market you prospect in. Pick an open
+          market, choose a city, and launch a targeted Google Maps search in one
+          motion.
+        </p>
+      </section>
+
+      <section
+        class="summary-grid"
+        id="summaryGrid"
+        aria-label="Live market summary"
+      >
+        <div class="metric-card is-open">
+          <div class="metric-label">Open now</div>
+          <div class="metric-value" id="statOpen">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Closed</div>
+          <div class="metric-value" id="statClosed">0</div>
+        </div>
+        <div class="metric-card is-weekend">
+          <div class="metric-label">Weekend</div>
+          <div class="metric-value" id="statWeekend">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Total markets</div>
+          <div class="metric-value" id="statTotal">0</div>
+        </div>
+      </section>
+
+      <div class="best-window" id="bestWindow">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z" />
+          <path d="M12 6v6l4 2" />
+        </svg>
+        <span id="bestWindowText">Checking markets…</span>
+      </div>
+
+      <div class="filter-bar">
+        <div class="search-field">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search country, city or niche"
+            aria-label="Search country, city or niche"
+          />
+        </div>
+        <button class="filter-chip" id="openNowChip" aria-pressed="false">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 6v6l4 2" />
+          </svg>
+          Open now
+        </button>
+        <button
+          class="filter-chip weekend-chip"
+          id="weekendChip"
+          aria-pressed="false"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M3 10h18" />
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+          </svg>
+          Show weekend markets
+        </button>
+        <span class="result-count" id="resultCount"></span>
+      </div>
+
+      <section
+        class="market-grid"
+        id="marketGrid"
+        aria-label="Market list"
+      ></section>
+
+      <footer>
+        <div>
+          Developed by <br />
+          <span class="brand-sm" id="sm"> SmileyMinhaj </span>
+        </div>
+
+        <div class="socials">
+          <!-- Email -->
+
+          <a
+            href="mailto:smileyminhaj@gmail.com"
+            title="Email"
+            aria-label="Email"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M3 5.5A2.5 2.5 0 0 1 5.5 3h13A2.5 2.5 0 0 1 21 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18.5v-13zM5 6v.4l7 5.25 7-5.25V6H5zm14 2.9-6.4 4.8a1 1 0 0 1-1.2 0L5 8.9v9.6c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5V8.9z"
+              />
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+
+          <a
+            href="https://facebook.com/smileyminhaj"
+            target="_blank"
+            rel="noopener"
+            title="@smileyminhaj · Facebook"
+            aria-label="Facebook"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.4-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.4v3h2.7v8h3.4z"
+              />
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+
+          <a
+            href="https://instagram.com/smileyminhaj"
+            target="_blank"
+            rel="noopener"
+            title="@smileyminhaj · Instagram"
+            aria-label="Instagram"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 12 16.5 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 12 14.5 2.5 2.5 0 0 0 12 9.5zM17.5 6.2a1.1 1.1 0 1 1-1.1 1.1 1.1 0 0 1-1.1-1.1z"
+              />
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+
+          <a
+            href="https://linkedin.com/in/smileyminhaj"
+            target="_blank"
+            rel="noopener"
+            title="smileyminhaj · LinkedIn"
+            aria-label="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M5.2 3.5A2.2 2.2 0 1 1 5.2 7.9 2.2 2.2 0 0 1 5.2 3.5zM3.4 9h3.6v11H3.4V9zm5.7 0h3.4v1.5h.1c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.4 4.4 5.6V20h-3.6v-5.1c0-1.2 0-2.8-1.8-2.8s-2 1.3-2 2.7V20H9.1V9z"
+              />
+            </svg>
+          </a>
+
+          <!-- GitHub -->
+
+          <a
+            href="https://github.com/smileyminhaj"
+            target="_blank"
+            rel="noopener"
+            title="@smileyminhaj · GitHub"
+            aria-label="GitHub"
+          >
+            <span class="github-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 .7a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.74.08-.74 1.2.09 1.83 1.23 1.83 1.23 1.07 1.82 2.8 1.3 3.48.99.11-.77.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.45 11.45 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.6-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .7Z"
+                />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        'use strict';
+
+        /* ============================================================
+     1. MARKET DATA
+     ============================================================ */
+        var NICHES = [
+          'Pest Control',
+          'Roofing',
+          'Plumbing',
+          'Tree Services',
+          'Landscaping',
+          'HVAC',
+          'Electrician',
+          'Locksmith',
+        ];
+
+        var WEEKDAY_INDEX = {
+          Sun: 0,
+          Mon: 1,
+          Tue: 2,
+          Wed: 3,
+          Thu: 4,
+          Fri: 5,
+          Sat: 6,
+        };
+        var STANDARD_WEEKEND = [0, 6];
+        var GULF_WEEKEND = [5, 6];
+
+        var MARKETS = [
+          {
+            code: 'US',
+            name: 'United States',
+            flag: '🇺🇸',
+            timezone: 'America/New_York',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'New York', timezone: 'America/New_York' },
+              { name: 'Chicago', timezone: 'America/Chicago' },
+              { name: 'Los Angeles', timezone: 'America/Los_Angeles' },
+              { name: 'Miami', timezone: 'America/New_York' },
+            ],
+          },
+          {
+            code: 'CA',
+            name: 'Canada',
+            flag: '🇨🇦',
+            timezone: 'America/Toronto',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'Toronto', timezone: 'America/Toronto' },
+              { name: 'Vancouver', timezone: 'America/Vancouver' },
+              { name: 'Montreal', timezone: 'America/Toronto' },
+              { name: 'Calgary', timezone: 'America/Edmonton' },
+            ],
+          },
+          {
+            code: 'GB',
+            name: 'United Kingdom',
+            flag: '🇬🇧',
+            timezone: 'Europe/London',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'London', timezone: 'Europe/London' },
+              { name: 'Manchester', timezone: 'Europe/London' },
+              { name: 'Birmingham', timezone: 'Europe/London' },
+            ],
+          },
+          {
+            code: 'IE',
+            name: 'Ireland',
+            flag: '🇮🇪',
+            timezone: 'Europe/Dublin',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'Dublin', timezone: 'Europe/Dublin' },
+              { name: 'Cork', timezone: 'Europe/Dublin' },
+            ],
+          },
+          {
+            code: 'DE',
+            name: 'Germany',
+            flag: '🇩🇪',
+            timezone: 'Europe/Berlin',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'Berlin', timezone: 'Europe/Berlin' },
+              { name: 'Munich', timezone: 'Europe/Berlin' },
+              { name: 'Hamburg', timezone: 'Europe/Berlin' },
+            ],
+          },
+          {
+            code: 'NL',
+            name: 'Netherlands',
+            flag: '🇳🇱',
+            timezone: 'Europe/Amsterdam',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'Amsterdam', timezone: 'Europe/Amsterdam' },
+              { name: 'Rotterdam', timezone: 'Europe/Amsterdam' },
+            ],
+          },
+          {
+            code: 'FR',
+            name: 'France',
+            flag: '🇫🇷',
+            timezone: 'Europe/Paris',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'Paris', timezone: 'Europe/Paris' },
+              { name: 'Lyon', timezone: 'Europe/Paris' },
+            ],
+          },
+          {
+            code: 'AE',
+            name: 'United Arab Emirates',
+            flag: '🇦🇪',
+            timezone: 'Asia/Dubai',
+            weekendDays: GULF_WEEKEND,
+            workStart: 9,
+            workEnd: 18,
+            cities: [
+              { name: 'Dubai', timezone: 'Asia/Dubai' },
+              { name: 'Abu Dhabi', timezone: 'Asia/Dubai' },
+            ],
+          },
+          {
+            code: 'SG',
+            name: 'Singapore',
+            flag: '🇸🇬',
+            timezone: 'Asia/Singapore',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 18,
+            cities: [{ name: 'Singapore', timezone: 'Asia/Singapore' }],
+          },
+          {
+            code: 'AU',
+            name: 'Australia',
+            flag: '🇦🇺',
+            timezone: 'Australia/Sydney',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'Sydney', timezone: 'Australia/Sydney' },
+              { name: 'Melbourne', timezone: 'Australia/Sydney' },
+              { name: 'Brisbane', timezone: 'Australia/Brisbane' },
+              { name: 'Perth', timezone: 'Australia/Perth' },
+            ],
+          },
+          {
+            code: 'NZ',
+            name: 'New Zealand',
+            flag: '🇳🇿',
+            timezone: 'Pacific/Auckland',
+            weekendDays: STANDARD_WEEKEND,
+            workStart: 9,
+            workEnd: 17,
+            cities: [
+              { name: 'Auckland', timezone: 'Pacific/Auckland' },
+              { name: 'Wellington', timezone: 'Pacific/Auckland' },
+            ],
+          },
+        ];
+
+        /* ============================================================
+     2. STORAGE
+     ============================================================ */
+        var STORE_CITY_KEY = 'clientRadar.selectedCities';
+        var STORE_WEEKEND_KEY = 'clientRadar.showWeekends';
+        var STORE_SEARCH_KEY = 'clientRadar.searchTerm';
+
+        function loadSelectedCities() {
+          try {
+            var raw = localStorage.getItem(STORE_CITY_KEY);
+            return raw ? JSON.parse(raw) : {};
+          } catch (e) {
+            return {};
+          }
+        }
+        function saveSelectedCities(map) {
+          try {
+            localStorage.setItem(STORE_CITY_KEY, JSON.stringify(map));
+          } catch (e) {}
+        }
+        function loadShowWeekends() {
+          try {
+            return localStorage.getItem(STORE_WEEKEND_KEY) === 'true';
+          } catch (e) {
+            return false;
+          }
+        }
+        function saveShowWeekends(v) {
+          try {
+            localStorage.setItem(STORE_WEEKEND_KEY, v ? 'true' : 'false');
+          } catch (e) {}
+        }
+
+        /* ============================================================
+     3. TIME / TIMEZONE UTILITIES
+     ============================================================ */
+        var partsFormatterCache = {};
+        function getPartsFormatter(tz) {
+          if (!partsFormatterCache[tz]) {
+            partsFormatterCache[tz] = new Intl.DateTimeFormat('en-US', {
+              timeZone: tz,
+              hour12: false,
+              weekday: 'short',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            });
+          }
+          return partsFormatterCache[tz];
+        }
+        function getZonedParts(date, tz) {
+          var parts = getPartsFormatter(tz).formatToParts(date);
+          var map = {};
+          for (var i = 0; i < parts.length; i++) {
+            map[parts[i].type] = parts[i].value;
+          }
+          return {
+            weekday: map.weekday,
+            hour: parseInt(map.hour, 10),
+            minute: parseInt(map.minute, 10),
+            second: parseInt(map.second, 10),
+          };
+        }
+
+        var displayFormatterCache = {};
+        function getDisplayFormatter(tz) {
+          if (!displayFormatterCache[tz]) {
+            displayFormatterCache[tz] = new Intl.DateTimeFormat('en-US', {
+              timeZone: tz,
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+            });
+          }
+          return displayFormatterCache[tz];
+        }
+        function formatLocalTime(date, tz) {
+          try {
+            return getDisplayFormatter(tz).format(date);
+          } catch (e) {
+            return '--:--';
+          }
+        }
+
+        var offsetFormatterCache = {};
+        function getOffsetLabel(date, tz) {
+          try {
+            if (!offsetFormatterCache[tz]) {
+              offsetFormatterCache[tz] = new Intl.DateTimeFormat('en-US', {
+                timeZone: tz,
+                hour: '2-digit',
+                timeZoneName: 'shortOffset',
+              });
+            }
+            var parts = offsetFormatterCache[tz].formatToParts(date);
+            var found = parts.filter(function (p) {
+              return p.type === 'timeZoneName';
+            })[0];
+            return found ? found.value.replace('GMT', 'UTC') : '';
+          } catch (e) {
+            return '';
+          }
+        }
+
+        var abbrFormatterCache = {};
+        function getTZAbbr(date, tz) {
+          try {
+            if (!abbrFormatterCache[tz]) {
+              abbrFormatterCache[tz] = new Intl.DateTimeFormat('en-US', {
+                timeZone: tz,
+                hour: '2-digit',
+                timeZoneName: 'short',
+              });
+            }
+            var parts = abbrFormatterCache[tz].formatToParts(date);
+            var found = parts.filter(function (p) {
+              return p.type === 'timeZoneName';
+            })[0];
+            return found ? found.value : '';
+          } catch (e) {
+            return '';
+          }
+        }
+
+        function pad2(n) {
+          return n < 10 ? '0' + n : '' + n;
+        }
+
+        function formatBDTime(date) {
+          var p = getZonedParts(date, 'Asia/Dhaka');
+          var h12 = p.hour % 12;
+          if (h12 === 0) h12 = 12;
+          var suffix = p.hour >= 12 ? 'PM' : 'AM';
+          return (
+            h12 + ':' + pad2(p.minute) + ':' + pad2(p.second) + ' ' + suffix
+          );
+        }
+        var bdDateFormatter = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Asia/Dhaka',
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+        });
+
+        /* ============================================================
+     4. STATUS CALCULATION
+     ============================================================ */
+        function computeStatus(market, tz, now) {
+          var p = getZonedParts(now, tz);
+          var dayIdx = WEEKDAY_INDEX[p.weekday];
+          var totalMin = p.hour * 60 + p.minute;
+          var startMin = market.workStart * 60;
+          var endMin = market.workEnd * 60;
+          var isWeekend = market.weekendDays.indexOf(dayIdx) !== -1;
+
+          var status,
+            remainingMin = null;
+          if (isWeekend) {
+            status = 'weekend';
+          } else if (totalMin >= startMin && totalMin < endMin) {
+            status = 'open';
+            remainingMin = endMin - totalMin;
+          } else {
+            status = 'outside';
+          }
+
+          return {
+            status: status,
+            remainingMin: remainingMin,
+            windowMin: endMin - startMin,
+            localTime: formatLocalTime(now, tz),
+            tzAbbr: getTZAbbr(now, tz),
+            utcOffset: getOffsetLabel(now, tz),
+          };
+        }
+
+        function formatRemaining(mins) {
+          if (mins == null) return '';
+          var h = Math.floor(mins / 60),
+            m = mins % 60;
+          if (h > 0) return h + 'h ' + m + 'm remaining';
+          return m + 'm remaining';
+        }
+
+        var STATUS_RANK = { open: 0, outside: 1, weekend: 2 };
+
+        /* ============================================================
+     5. GOOGLE MAPS URL
+     ============================================================ */
+        function buildMapsUrl(niche, city, countryName) {
+          var query = niche + ' in ' + city + ', ' + countryName;
+          return (
+            'https://www.google.com/maps/search/' + encodeURIComponent(query)
+          );
+        }
+
+        /* ============================================================
+     6. ICONS
+     ============================================================ */
+        var ICON_CLOCK =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+        var ICON_GLOBE =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a13 13 0 0 1 0 18a13 13 0 0 1 0-18"/></svg>';
+        var ICON_PIN =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+        var ICON_TARGET =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>';
+        var ICON_EXTERNAL =
+          '<svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>';
+        var ICON_CHECK =
+          '<svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+        var ICON_ALERT =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 2.7 17.1a1.6 1.6 0 0 0 1.4 2.4h15.8a1.6 1.6 0 0 0 1.4-2.4L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg>';
+
+        // Self-contained SVG flags. Emoji flags (e.g. the U+1F1FA U+1F1F8 pair for
+        // the US) fall back to plain letter glyphs on systems without a color-emoji
+        // font, which visually duplicates the country-code text next to it. These
+        // SVGs render identically everywhere and can never fall back to text.
+        var UNION_JACK_MINI =
+          '<rect width="30" height="20" fill="#00247d"/>' +
+          '<g stroke="#fff" stroke-width="4"><line x1="0" y1="0" x2="30" y2="20"/><line x1="30" y1="0" x2="0" y2="20"/></g>' +
+          '<g stroke="#cf142b" stroke-width="2"><line x1="0" y1="0" x2="30" y2="20"/><line x1="30" y1="0" x2="0" y2="20"/></g>' +
+          '<g stroke="#fff" stroke-width="6"><line x1="15" y1="0" x2="15" y2="20"/><line x1="0" y1="10" x2="30" y2="10"/></g>' +
+          '<g stroke="#cf142b" stroke-width="3"><line x1="15" y1="0" x2="15" y2="20"/><line x1="0" y1="10" x2="30" y2="10"/></g>';
+
+        var FLAG_SVG = {
+          US:
+            '<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#b22234"/>' +
+            '<g fill="#fff"><rect y="1.54" width="30" height="1.54"/><rect y="4.62" width="30" height="1.54"/>' +
+            '<rect y="7.69" width="30" height="1.54"/><rect y="10.77" width="30" height="1.54"/>' +
+            '<rect y="13.85" width="30" height="1.54"/><rect y="16.92" width="30" height="1.54"/></g>' +
+            '<rect width="12" height="10.77" fill="#3c3b6e"/></svg>',
+          CA:
+            '<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/>' +
+            '<rect width="7.5" height="20" fill="#d52b1e"/><rect x="22.5" width="7.5" height="20" fill="#d52b1e"/>' +
+            '<path d="M15 5 l1.2 2.4 2.6-1.2-.6 2.6 2.6.4-2 1.8 1.4 2.2-2.6-.4.2 2.6-1.8-1.8-1.8 1.8.2-2.6-2.6.4 1.4-2.2-2-1.8 2.6-.4-.6-2.6 2.6 1.2z" fill="#d52b1e"/></svg>',
+          GB: '<svg viewBox="0 0 30 20">' + UNION_JACK_MINI + '</svg>',
+          IE:
+            '<svg viewBox="0 0 30 20"><rect width="10" height="20" fill="#169b62"/>' +
+            '<rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ff883e"/></svg>',
+          DE:
+            '<svg viewBox="0 0 30 20"><rect width="30" height="6.67" fill="#000"/>' +
+            '<rect y="6.67" width="30" height="6.67" fill="#dd0000"/><rect y="13.33" width="30" height="6.67" fill="#ffce00"/></svg>',
+          NL:
+            '<svg viewBox="0 0 30 20"><rect width="30" height="6.67" fill="#ae1c28"/>' +
+            '<rect y="6.67" width="30" height="6.67" fill="#fff"/><rect y="13.33" width="30" height="6.67" fill="#21468b"/></svg>',
+          FR:
+            '<svg viewBox="0 0 30 20"><rect width="10" height="20" fill="#0055a4"/>' +
+            '<rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ef4135"/></svg>',
+          AE:
+            '<svg viewBox="0 0 30 20"><rect width="30" height="6.67" fill="#00732f"/>' +
+            '<rect y="6.67" width="30" height="6.67" fill="#fff"/><rect y="13.33" width="30" height="6.67" fill="#000"/>' +
+            '<rect width="8" height="20" fill="#ff0000"/></svg>',
+          SG:
+            '<svg viewBox="0 0 30 20"><rect width="30" height="10" fill="#ed2939"/><rect y="10" width="30" height="10" fill="#fff"/>' +
+            '<circle cx="8" cy="6" r="3" fill="#fff"/><circle cx="9.5" cy="5.3" r="2.6" fill="#ed2939"/>' +
+            '<g fill="#fff"><circle cx="13" cy="4" r="0.6"/><circle cx="15" cy="5.5" r="0.6"/><circle cx="14.4" cy="7.5" r="0.6"/>' +
+            '<circle cx="11.6" cy="7.5" r="0.6"/><circle cx="11" cy="5.5" r="0.6"/></g></svg>',
+          AU:
+            '<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#00247d"/>' +
+            '<g transform="scale(0.5)">' +
+            UNION_JACK_MINI +
+            '</g>' +
+            '<g fill="#fff"><circle cx="8" cy="16" r="1"/><circle cx="22" cy="6" r="1"/><circle cx="25" cy="10" r="1"/>' +
+            '<circle cx="22" cy="14" r="1"/><circle cx="18" cy="11" r="0.7"/></g></svg>',
+          NZ:
+            '<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#00247d"/>' +
+            '<g transform="scale(0.5)">' +
+            UNION_JACK_MINI +
+            '</g>' +
+            '<g fill="#cf142b" stroke="#fff" stroke-width="0.4"><circle cx="22" cy="6" r="1.1"/><circle cx="25.5" cy="9.5" r="1.1"/>' +
+            '<circle cx="22.5" cy="13.5" r="1.1"/><circle cx="19" cy="10.5" r="0.9"/></g></svg>',
+        };
+
+        /* ============================================================
+     7. STATE
+     ============================================================ */
+        var state = {
+          selectedCities: loadSelectedCities(),
+          showWeekends: loadShowWeekends(),
+          openNowOnly: false,
+          searchTerm: '',
+          lastOrder: [],
+          needsCityFlash: {},
+        };
+
+        var els = {
+          grid: document.getElementById('marketGrid'),
+          statOpen: document.getElementById('statOpen'),
+          statClosed: document.getElementById('statClosed'),
+          statWeekend: document.getElementById('statWeekend'),
+          statTotal: document.getElementById('statTotal'),
+          bestWindow: document.getElementById('bestWindow'),
+          bestWindowText: document.getElementById('bestWindowText'),
+          bdTime: document.getElementById('bdTime'),
+          bdDate: document.getElementById('bdDate'),
+          search: document.getElementById('searchInput'),
+          openNowChip: document.getElementById('openNowChip'),
+          weekendChip: document.getElementById('weekendChip'),
+          resultCount: document.getElementById('resultCount'),
+          refreshBtn: document.getElementById('refreshBtn'),
+        };
+
+        els.weekendChip.setAttribute(
+          'aria-pressed',
+          state.showWeekends ? 'true' : 'false',
+        );
+
+        /* ============================================================
+     8. FILTERING + MATCHING
+     ============================================================ */
+        function marketMatchesSearch(market, term) {
+          if (!term) return true;
+          term = term.toLowerCase();
+          if (market.name.toLowerCase().indexOf(term) !== -1) return true;
+          for (var i = 0; i < market.cities.length; i++) {
+            if (market.cities[i].name.toLowerCase().indexOf(term) !== -1)
+              return true;
+          }
+          for (var j = 0; j < NICHES.length; j++) {
+            if (NICHES[j].toLowerCase().indexOf(term) !== -1) return true;
+          }
+          return false;
+        }
+
+        function getVisibleSortedMarkets(computed) {
+          var list = MARKETS.filter(function (m) {
+            var c = computed[m.code];
+            if (!state.showWeekends && c.status === 'weekend') return false;
+            if (state.openNowOnly && c.status !== 'open') return false;
+            if (!marketMatchesSearch(m, state.searchTerm)) return false;
+            return true;
+          });
+          list.sort(function (a, b) {
+            var ca = computed[a.code],
+              cb = computed[b.code];
+            var ra = STATUS_RANK[ca.status],
+              rb = STATUS_RANK[cb.status];
+            if (ra !== rb) return ra - rb;
+            if (ca.status === 'open') {
+              return (cb.remainingMin || 0) - (ca.remainingMin || 0);
+            }
+            return a.name.localeCompare(b.name);
+          });
+          return list;
+        }
+
+        /* ============================================================
+     9. RENDERING
+     ============================================================ */
+        function renderCard(market, computed, isPriority) {
+          var selectedCity = state.selectedCities[market.code] || null;
+          var needsFlash = !!state.needsCityFlash[market.code];
+
+          var cityChips = market.cities
+            .map(function (city) {
+              var pressed = city.name === selectedCity;
+              return (
+                '<button type="button" class="chip city-chip" data-market="' +
+                market.code +
+                '" data-city="' +
+                city.name +
+                '" aria-pressed="' +
+                pressed +
+                '">' +
+                (pressed ? ICON_CHECK : '') +
+                '<span>' +
+                city.name +
+                '</span></button>'
+              );
+            })
+            .join('');
+
+          var nicheChips = NICHES.map(function (niche) {
+            return (
+              '<button type="button" class="chip niche-chip" data-market="' +
+              market.code +
+              '" data-niche="' +
+              niche +
+              '">' +
+              niche +
+              '</button>'
+            );
+          }).join('');
+
+          var statusLabel =
+            computed.status === 'open'
+              ? 'Open now'
+              : computed.status === 'weekend'
+                ? 'Weekend'
+                : 'Outside hours';
+          var remainingPct =
+            computed.status === 'open'
+              ? Math.max(
+                  4,
+                  Math.min(
+                    100,
+                    Math.round(
+                      (computed.remainingMin / computed.windowMin) * 100,
+                    ),
+                  ),
+                )
+              : 0;
+
+          var card = document.createElement('div');
+          card.className =
+            'market-card status-' +
+            computed.status +
+            (isPriority ? ' is-priority' : '');
+          card.setAttribute('data-market', market.code);
+          card.innerHTML =
+            (isPriority ? '<span class="priority-tag">Priority</span>' : '') +
+            '<div class="card-top">' +
+            '<div class="country-id">' +
+            '<span class="flag" aria-hidden="true">' +
+            FLAG_SVG[market.code] +
+            '</span>' +
+            '<span><span class="country-name">' +
+            market.name +
+            '</span><span class="country-code">' +
+            market.code +
+            '</span></span>' +
+            '</div>' +
+            '<span class="status-badge ' +
+            computed.status +
+            '"><span class="dot"></span>' +
+            statusLabel +
+            '</span>' +
+            '</div>' +
+            '<div class="time-row">' +
+            '<div class="time-main">' +
+            '<span class="time-value" data-role="time">' +
+            computed.localTime +
+            '</span>' +
+            '<span class="time-meta">' +
+            computed.tzAbbr +
+            ' · ' +
+            computed.utcOffset +
+            '</span>' +
+            '</div>' +
+            '<div>' +
+            '<div class="remaining-tag ' +
+            (computed.status === 'open' ? 'is-open' : '') +
+            '" data-role="remaining">' +
+            (computed.status === 'open'
+              ? formatRemaining(computed.remainingMin)
+              : computed.status === 'weekend'
+                ? 'Reopens weekday'
+                : 'Closed for today') +
+            '</div>' +
+            (computed.status === 'open'
+              ? '<div class="remaining-bar"><div class="remaining-bar-fill" data-role="bar" style="width:' +
+                remainingPct +
+                '%"></div></div>'
+              : '') +
+            '</div>' +
+            '</div>' +
+            '<div class="city-block' +
+            (needsFlash ? ' needs-city shake' : '') +
+            '" data-role="city-block">' +
+            '<div class="section-label">City</div>' +
+            '<div class="chip-row" data-role="city-row">' +
+            cityChips +
+            '</div>' +
+            '<div class="validation-msg">' +
+            ICON_ALERT +
+            '<span>Select a city to continue</span></div>' +
+            '</div>' +
+            '<div class="niche-block">' +
+            '<div class="section-label">Target niche</div>' +
+            '<div class="chip-row" data-role="niche-row">' +
+            nicheChips +
+            '</div>' +
+            '</div>';
+
+          return card;
+        }
+
+        function render(computed, order) {
+          els.grid.innerHTML = '';
+          if (order.length === 0) {
+            var empty = document.createElement('div');
+            empty.className = 'empty-state';
+            empty.textContent =
+              state.searchTerm || state.openNowOnly
+                ? 'No markets match the current filters.'
+                : 'No markets to show.';
+            els.grid.appendChild(empty);
+            els.resultCount.textContent = '0 markets';
+            return;
+          }
+          var priorityCode = null;
+          for (var i = 0; i < order.length; i++) {
+            if (computed[order[i].code].status === 'open') {
+              priorityCode = order[i].code;
+              break;
+            }
+          }
+          order.forEach(function (market) {
+            var card = renderCard(
+              market,
+              computed[market.code],
+              market.code === priorityCode,
+            );
+            els.grid.appendChild(card);
+          });
+          els.resultCount.textContent =
+            order.length + (order.length === 1 ? ' market' : ' markets');
+        }
+
+        function updateInPlace(computed, order) {
+          var priorityCode = null;
+          for (var i = 0; i < order.length; i++) {
+            if (computed[order[i].code].status === 'open') {
+              priorityCode = order[i].code;
+              break;
+            }
+          }
+          order.forEach(function (market) {
+            var c = computed[market.code];
+            var card = els.grid.querySelector(
+              '[data-market="' + market.code + '"]',
+            );
+            if (!card) return;
+
+            var timeEl = card.querySelector('[data-role="time"]');
+            if (timeEl) timeEl.textContent = c.localTime;
+
+            var remEl = card.querySelector('[data-role="remaining"]');
+            if (remEl) {
+              remEl.textContent =
+                c.status === 'open'
+                  ? formatRemaining(c.remainingMin)
+                  : c.status === 'weekend'
+                    ? 'Reopens weekday'
+                    : 'Closed for today';
+            }
+            var barEl = card.querySelector('[data-role="bar"]');
+            if (barEl && c.status === 'open') {
+              var pct = Math.max(
+                4,
+                Math.min(100, Math.round((c.remainingMin / c.windowMin) * 100)),
+              );
+              barEl.style.width = pct + '%';
+            }
+            var isPriority = market.code === priorityCode;
+            card.classList.toggle('is-priority', isPriority);
+            var tag = card.querySelector('.priority-tag');
+            if (isPriority && !tag) {
+              var t = document.createElement('span');
+              t.className = 'priority-tag';
+              t.textContent = 'Priority';
+              card.insertBefore(t, card.firstChild);
+            } else if (!isPriority && tag) {
+              tag.remove();
+            }
+          });
+        }
+
+        /* ============================================================
+     10. SUMMARY + BEST WINDOW
+     ============================================================ */
+        function renderSummary(computed) {
+          var open = 0,
+            closed = 0,
+            weekend = 0;
+          MARKETS.forEach(function (m) {
+            var s = computed[m.code].status;
+            if (s === 'open') open++;
+            else if (s === 'weekend') weekend++;
+            else closed++;
+          });
+          els.statOpen.textContent = open;
+          els.statClosed.textContent = closed;
+          els.statWeekend.textContent = weekend;
+          els.statTotal.textContent = MARKETS.length;
+
+          var best = null;
+          MARKETS.forEach(function (m) {
+            var c = computed[m.code];
+            if (
+              c.status === 'open' &&
+              (!best || c.remainingMin > best.remainingMin)
+            ) {
+              best = { market: m, remainingMin: c.remainingMin };
+            }
+          });
+
+          if (best) {
+            els.bestWindow.classList.remove('is-empty');
+            els.bestWindowText.innerHTML =
+              'Best window right now: <b><span class="flag" style="vertical-align:-3px" aria-hidden="true">' +
+              FLAG_SVG[best.market.code] +
+              '</span> ' +
+              best.market.name +
+              '</b>';
+            var timeSpan = document.createElement('span');
+            timeSpan.className = 'bw-time';
+            timeSpan.textContent = formatRemaining(best.remainingMin);
+            els.bestWindowText.appendChild(document.createTextNode(' '));
+            els.bestWindowText.appendChild(timeSpan);
+          } else {
+            els.bestWindow.classList.add('is-empty');
+            els.bestWindowText.textContent =
+              'No markets are currently open. Check back soon or browse weekend markets below.';
+          }
+        }
+
+        /* ============================================================
+     11. MAIN TICK
+     ============================================================ */
+        function computeAll(now) {
+          var computed = {};
+          MARKETS.forEach(function (m) {
+            var selectedCity = state.selectedCities[m.code];
+            var cityTz = m.timezone;
+            if (selectedCity) {
+              var match = m.cities.filter(function (c) {
+                return c.name === selectedCity;
+              })[0];
+              if (match) cityTz = match.timezone;
+            }
+            computed[m.code] = computeStatus(m, cityTz, now);
+          });
+          return computed;
+        }
+
+        function tick(forceFullRender) {
+          var now = new Date();
+          els.bdTime.textContent = formatBDTime(now);
+          els.bdDate.textContent = bdDateFormatter.format(now);
+
+          var computed = computeAll(now);
+          renderSummary(computed);
+
+          var order = getVisibleSortedMarkets(computed);
+          var orderCodes = order.map(function (m) {
+            return m.code;
+          });
+          var orderChanged = orderCodes.join(',') !== state.lastOrder.join(',');
+
+          if (
+            forceFullRender ||
+            orderChanged ||
+            els.grid.children.length === 0
+          ) {
+            render(computed, order);
+          } else {
+            updateInPlace(computed, order);
+          }
+          state.lastOrder = orderCodes;
+        }
+
+        /* ============================================================
+     12. EVENT HANDLING
+     ============================================================ */
+        els.grid.addEventListener('click', function (e) {
+          var cityBtn = e.target.closest('.city-chip');
+          if (cityBtn) {
+            var mCode = cityBtn.getAttribute('data-market');
+            var cityName = cityBtn.getAttribute('data-city');
+            state.selectedCities[mCode] = cityName;
+            saveSelectedCities(state.selectedCities);
+            delete state.needsCityFlash[mCode];
+            tick(true);
+            return;
+          }
+
+          var nicheBtn = e.target.closest('.niche-chip');
+          if (nicheBtn) {
+            var marketCode = nicheBtn.getAttribute('data-market');
+            var niche = nicheBtn.getAttribute('data-niche');
+            var market = MARKETS.filter(function (m) {
+              return m.code === marketCode;
+            })[0];
+            var selected = state.selectedCities[marketCode];
+
+            if (!selected) {
+              state.needsCityFlash[marketCode] = true;
+              tick(true);
+              var block = els.grid.querySelector(
+                '[data-market="' + marketCode + '"] [data-role="city-block"]',
+              );
+              if (block) {
+                setTimeout(function () {
+                  block.classList.remove('shake');
+                  state.needsCityFlash[marketCode] = false;
+                }, 400);
+              }
+              return;
+            }
+
+            var url = buildMapsUrl(niche, selected, market.name);
+            window.open(url, '_blank', 'noopener,noreferrer');
+          }
+        });
+
+        els.search.addEventListener('input', function (e) {
+          state.searchTerm = e.target.value.trim();
+          tick(true);
+        });
+
+        els.openNowChip.addEventListener('click', function () {
+          state.openNowOnly = !state.openNowOnly;
+          els.openNowChip.setAttribute(
+            'aria-pressed',
+            state.openNowOnly ? 'true' : 'false',
+          );
+          tick(true);
+        });
+
+        els.weekendChip.addEventListener('click', function () {
+          state.showWeekends = !state.showWeekends;
+          els.weekendChip.setAttribute(
+            'aria-pressed',
+            state.showWeekends ? 'true' : 'false',
+          );
+          saveShowWeekends(state.showWeekends);
+          tick(true);
+        });
+
+        els.refreshBtn.addEventListener('click', function () {
+          els.refreshBtn.classList.add('spinning');
+          tick(true);
+          setTimeout(function () {
+            els.refreshBtn.classList.remove('spinning');
+          }, 400);
+        });
+
+        /* ============================================================
+     13. INIT
+     ============================================================ */
+        tick(true);
+        setInterval(function () {
+          tick(false);
+        }, 1000);
+      })();
+    </script>
+  </body>
+</html>
